@@ -64,13 +64,13 @@ type GetMetaType<Head> = Head['meta'] extends object
 type GetRoute<FullPath, Head> = FullPath extends `${ string }:${ string }` ? {
   params: ForParams<Split<FullPath, '/'>>
   name: Head['name']
-  query?: GetQueryType<Head>
   hash?: string
+  query?: GetQueryType<Head>
   meta?: GetMetaType<Head>
 } : {
   name: Head['name']
-  query?: GetQueryType<Head>
   hash?: string
+  query?: GetQueryType<Head>
   meta?: GetMetaType<Head>
 }
 

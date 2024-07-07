@@ -1,6 +1,25 @@
 import {RouteName} from '@/utils/RouteName'
 import {RouterView, type RouteRecordRaw} from 'vue-router'
 
+export type QueryParamsProductsList = {
+  searchTerm?: string
+  minPrice?: string
+  maxPrice?: string
+  availability?: string
+  rating?: string
+  sortBy?: string
+}
+
+export type QueryParamsProduct = {
+  ratingFilter?: string
+  sortBy?: string
+}
+
+export type QueryParamsProductsCompare = {
+  showDifferencesOnly?: string
+  compareSpecs?: string
+}
+
 export const routerProducts = {
   path: '/products',
   children: [
@@ -8,6 +27,9 @@ export const routerProducts = {
       path: '',
       name: RouteName.PRODUCT_LIST,
       component: RouterView,
+      meta: {
+        defaultQueryParams: {sortBy: 'date'} as QueryParamsProductsList,
+      },
     },
     {
       path: 'list/:categoryId',
@@ -21,6 +43,9 @@ export const routerProducts = {
           path: '',
           name: RouteName.PRODUCT,
           component: RouterView,
+          meta: {
+            defaultQueryParams: {} as QueryParamsProduct,
+          },
         },
         {
           path: 'reviews/:reviewId',
@@ -43,6 +68,9 @@ export const routerProducts = {
       path: 'compare/:productId1/:productId2',
       name: RouteName.REVIEW_COMPARE,
       component: RouterView,
+      meta: {
+        defaultQueryParams: {} as QueryParamsProductsCompare,
+      },
     },
   ],
 } as const satisfies RouteRecordRaw

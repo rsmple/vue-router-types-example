@@ -13,7 +13,28 @@ export const routes = [
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes,
+  routes: [
+    {
+      path: '/',
+      children: routes,
+
+      beforeEnter: (to) => {
+        if (to.meta.defaultQueryParams) {
+          let changed = false
+
+          Object.keys(to.meta.defaultQueryParams).forEach(key => {
+            if (!to.query[key]) {
+              to.query[key] = to.meta.defaultQueryParams[key]
+
+              changed = true
+            }
+          })
+
+          if (changed) return to
+        }
+      },
+    },
+  ],
 })
 
 export default router

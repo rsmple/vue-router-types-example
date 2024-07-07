@@ -1,6 +1,18 @@
 import {RouteName} from '@/utils/RouteName'
 import {RouterView, type RouteRecordRaw} from 'vue-router'
 
+export type QueryParamsBlog = {
+  search?: string
+  filterByTags?: string[]
+  sortBy?: string
+}
+
+export type QueryParamsCategory = {
+  search?: string
+  filterByTags?: string[]
+  sortBy?: string
+}
+
 export const routerBlog = {
   path: '/blog',
   children: [
@@ -8,6 +20,9 @@ export const routerBlog = {
       path: '',
       name: RouteName.BLOG,
       component: RouterView,
+      meta: {
+        defaultQueryParams: {} as QueryParamsBlog,
+      },
     },
     {
       path: 'posts/:postId',
@@ -31,6 +46,9 @@ export const routerBlog = {
           path: '',
           name: RouteName.CATEGORY,
           component: RouterView,
+          meta: {
+            defaultQueryParams: {} as QueryParamsCategory,
+          },
         },
         {
           path: 'posts/:postId',

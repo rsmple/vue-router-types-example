@@ -1,6 +1,13 @@
 import {RouteName} from '@/utils/RouteName'
 import {RouterView, type RouteRecordRaw} from 'vue-router'
 
+type QueryParamsHomeDashboard = {
+  dateRange?: string
+  sortBy?: string
+  filterBy?: string
+  viewMode?: string
+}
+
 export const routerHome = {
   path: '/home',
   children: [
@@ -8,6 +15,9 @@ export const routerHome = {
       path: 'dashboard',
       name: RouteName.DASHBOARD,
       component: RouterView,
+      meta: {
+        defaultQueryParams: {} as QueryParamsHomeDashboard,
+      },
     },
     {
       path: 'profile',

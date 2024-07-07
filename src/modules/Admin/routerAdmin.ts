@@ -1,6 +1,17 @@
 import {RouteName} from '@/utils/RouteName'
 import {RouterView, type RouteRecordRaw} from 'vue-router'
 
+export type QueryParamsUser = {
+  activeTab: string
+  level?: string,
+  assignedBy?: string
+}
+
+export type QueryParamsRole = {
+  level?: string,
+  assignedBy?: string
+}
+
 export const routerAdmin = {
   path: '/admin',
   children: [
@@ -20,6 +31,9 @@ export const routerAdmin = {
               path: '',
               name: RouteName.USER,
               component: RouterView,
+              meta: {
+                defaultQueryParams: {activeTab: 'MAIN'} as QueryParamsUser,
+              },
             },
             {
               path: 'permissions/:permissionId',
@@ -93,6 +107,9 @@ export const routerAdmin = {
                   path: '',
                   component: RouterView,
                   name: RouteName.ROLE,
+                  meta: {
+                    defaultQueryParams: {} as QueryParamsRole,
+                  },
                 },
                 {
                   path: 'permissions/:permissionId',

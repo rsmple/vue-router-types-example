@@ -1,5 +1,5 @@
 import {RouteName} from '@/utils/RouteName'
-import {RouterView, type RouteRecordRaw} from 'vue-router'
+import type {RouteRecordRaw} from 'vue-router'
 
 export type QueryParamsProductsList = {
   searchTerm?: string
@@ -26,7 +26,7 @@ export const routerProducts = {
     {
       path: '',
       name: RouteName.PRODUCT_LIST,
-      component: RouterView,
+      component: () => import('./views/ViewProductList.vue'),
       meta: {
         defaultQueryParams: {sortBy: 'date'} as QueryParamsProductsList,
       },
@@ -34,7 +34,7 @@ export const routerProducts = {
     {
       path: 'list/:categoryId',
       name: RouteName.CATEGOGY,
-      component: RouterView,
+      component: () => import('./views/ViewCategory.vue'),
     },
     {
       path: 'details/:productId',
@@ -42,7 +42,7 @@ export const routerProducts = {
         {
           path: '',
           name: RouteName.PRODUCT,
-          component: RouterView,
+          component: () => import('./views/ViewProduct.vue'),
           meta: {
             defaultQueryParams: {} as QueryParamsProduct,
           },
@@ -53,12 +53,12 @@ export const routerProducts = {
             {
               path: '',
               name: RouteName.REVIEW,
-              component: RouterView,
+              component: () => import('./views/ViewReview.vue'),
             },
             {
               path: 'comments/:commentId',
               name: RouteName.REVIEW_COMMENT,
-              component: RouterView,
+              component: () => import('./views/ViewReviewComment.vue'),
             },
           ],
         },
@@ -66,8 +66,8 @@ export const routerProducts = {
     },
     {
       path: 'compare/:productId1/:productId2',
-      name: RouteName.REVIEW_COMPARE,
-      component: RouterView,
+      name: RouteName.PRODUCT_COMPARE,
+      component: () => import('./views/ViewProductCompare.vue'),
       meta: {
         defaultQueryParams: {} as QueryParamsProductsCompare,
       },

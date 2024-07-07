@@ -2,9 +2,15 @@ import {routerAdmin} from '@/modules/Admin/routerAdmin'
 import {routerBlog} from '@/modules/Blog/routerBlog'
 import {routerHome} from '@/modules/Home/routerHome'
 import {routerProducts} from '@/modules/Products/routerProducts'
-import {createRouter, createWebHistory, type RouteRecordRaw} from 'vue-router'
+import {RouteName} from '@/utils/RouteName'
+import {createRouter, createWebHistory, RouterView, type RouteRecordRaw} from 'vue-router'
 
 export const routes = [
+  {
+    path: '/login',
+    name: RouteName.LOGIN,
+    component: RouterView,
+  },
   routerHome,
   routerProducts,
   routerBlog,

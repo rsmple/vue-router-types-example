@@ -1,5 +1,7 @@
 
 export enum RouteName {
+  LOGIN = 'LOGIN',
+
   /**
    * Admin
    */

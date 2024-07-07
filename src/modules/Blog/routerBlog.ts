@@ -1,5 +1,5 @@
 import {RouteName} from '@/utils/RouteName'
-import {RouterView, type RouteRecordRaw} from 'vue-router'
+import type {RouteRecordRaw} from 'vue-router'
 
 export type QueryParamsBlog = {
   search?: string
@@ -19,7 +19,7 @@ export const routerBlog = {
     {
       path: '',
       name: RouteName.BLOG,
-      component: RouterView,
+      component: () => import('./views/ViewBlog.vue'),
       meta: {
         defaultQueryParams: {} as QueryParamsBlog,
       },
@@ -30,12 +30,12 @@ export const routerBlog = {
         {
           path: '',
           name: RouteName.POST,
-          component: RouterView,
+          component: () => import('./views/ViewPost.vue'),
         },
         {
           path: 'comments/:commentId',
           name: RouteName.POST_COMMENT,
-          component: RouterView,
+          component: () => import('./views/ViewPostComment.vue'),
         },
       ],
     },
@@ -45,7 +45,7 @@ export const routerBlog = {
         {
           path: '',
           name: RouteName.CATEGORY,
-          component: RouterView,
+          component: () => import('./views/ViewCategory.vue'),
           meta: {
             defaultQueryParams: {} as QueryParamsCategory,
           },
@@ -53,7 +53,7 @@ export const routerBlog = {
         {
           path: 'posts/:postId',
           name: RouteName.CATEGORY_POST,
-          component: RouterView,
+          component: () => import('./views/ViewCategoryPost.vue'),
         },
       ],
     },

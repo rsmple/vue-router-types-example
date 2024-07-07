@@ -6,6 +6,8 @@ export enum RouteName {
    * Admin
    */
 
+  ADMIN = 'ADMIN',
+
   USER_LIST = 'USER_LIST',
   USER = 'USER',
   USER_PERMISSION = 'USER_PERMISSION',
@@ -58,7 +60,7 @@ export enum RouteName {
 
   PRODUCT_LIST = 'PRODUCT_LIST',
 
-  CATEGOGY = 'CATEGOGY',
+  PRODUCT_CATEGORY = 'PRODUCT_CATEGORY',
 
   PRODUCT = 'PRODUCT',
   REVIEW = 'REVIEW',

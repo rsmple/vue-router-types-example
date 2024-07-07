@@ -16,12 +16,17 @@ export const routerAdmin = {
   path: '/admin',
   children: [
     {
+      path: '',
+      name: RouteName.ADMIN,
+      component: () => import('./views/ViewAdmin.vue'),
+    },
+    {
       path: 'users',
       children: [
         {
           path: '',
           name: RouteName.USER_LIST,
-          component: RouterView,
+          component: () => import('./views/ViewUserList.vue'),
         },
         {
           path: ':userId',
@@ -30,7 +35,7 @@ export const routerAdmin = {
             {
               path: '',
               name: RouteName.USER,
-              component: RouterView,
+              component: () => import('./views/ViewUser.vue'),
               meta: {
                 defaultQueryParams: {activeTab: 'MAIN'} as QueryParamsUser,
               },
@@ -38,7 +43,7 @@ export const routerAdmin = {
             {
               path: 'permissions/:permissionId',
               name: RouteName.USER_PERMISSION,
-              component: RouterView,
+              component: () => import('./views/ViewUserPermission.vue'),
             },
           ],
         },
@@ -50,12 +55,12 @@ export const routerAdmin = {
         {
           path: '',
           name: RouteName.REPORT_LIST,
-          component: RouterView,
+          component: () => import('./views/ViewReportList.vue'),
         },
         {
           path: ':reportId',
           name: RouteName.REPORT,
-          component: RouterView,
+          component: () => import('./views/ViewReport.vue'),
         },
       ],
     },
@@ -65,7 +70,7 @@ export const routerAdmin = {
         {
           path: '',
           name: RouteName.LOG_LIST,
-          component: RouterView,
+          component: () => import('./views/ViewLogList.vue'),
         },
         {
           path: ':logId',
@@ -73,12 +78,12 @@ export const routerAdmin = {
             {
               path: '',
               name: RouteName.LOG,
-              component: RouterView,
+              component: () => import('./views/ViewLog.vue'),
             },
             {
               path: 'details',
               name: RouteName.LOG_DETAILS,
-              component: RouterView,
+              component: () => import('./views/ViewLogDetails.vue'),
             },
           ],
         },
@@ -90,7 +95,7 @@ export const routerAdmin = {
         {
           path: 'general',
           name: RouteName.GENERAL,
-          component: RouterView,
+          component: () => import('./views/ViewGeneral.vue'),
         },
         {
           path: 'roles',
@@ -98,14 +103,14 @@ export const routerAdmin = {
             {
               path: '',
               name: RouteName.ROLE_LIST,
-              component: RouterView,
+              component: () => import('./views/ViewRoleList.vue'),
             },
             {
               path: ':roleId',
               children: [
                 {
                   path: '',
-                  component: RouterView,
+                  component: () => import('./views/ViewRole.vue'),
                   name: RouteName.ROLE,
                   meta: {
                     defaultQueryParams: {} as QueryParamsRole,
@@ -113,7 +118,7 @@ export const routerAdmin = {
                 },
                 {
                   path: 'permissions/:permissionId',
-                  component: RouterView,
+                  component: () => import('./views/ViewRolePermission.vue'),
                   name: RouteName.ROLE_PERMISSION,
                 },
               ],

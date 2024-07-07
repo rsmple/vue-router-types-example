@@ -32,8 +32,8 @@ export const routerProducts = {
       },
     },
     {
-      path: 'list/:categoryId',
-      name: RouteName.CATEGOGY,
+      path: 'list/:productCategoryId',
+      name: RouteName.PRODUCT_CATEGORY,
       component: () => import('./views/ViewCategory.vue'),
     },
     {

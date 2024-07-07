@@ -1,5 +1,5 @@
 import {RouteName} from '@/utils/RouteName'
-import {RouterView, type RouteRecordRaw} from 'vue-router'
+import type {RouteRecordRaw} from 'vue-router'
 
 type QueryParamsHomeDashboard = {
   dateRange?: string
@@ -14,7 +14,7 @@ export const routerHome = {
     {
       path: 'dashboard',
       name: RouteName.DASHBOARD,
-      component: RouterView,
+      component: () => import('./views/ViewDashboard.vue'),
       meta: {
         defaultQueryParams: {} as QueryParamsHomeDashboard,
       },
@@ -22,7 +22,7 @@ export const routerHome = {
     {
       path: 'profile',
       name: RouteName.PROFILE,
-      component: RouterView,
+      component: () => import('./views/ViewProfile.vue'),
     },
     {
       path: 'settings',
@@ -30,7 +30,7 @@ export const routerHome = {
         {
           path: '',
           name: RouteName.SETTINGS,
-          component: RouterView,
+          component: () => import('./views/ViewSettings.vue'),
         },
         {
           path: 'account',
@@ -38,17 +38,17 @@ export const routerHome = {
             {
               path: '',
               name: RouteName.ACCOUNT,
-              component: RouterView,
+              component: () => import('./views/ViewAccount.vue'),
             },
             {
               path: 'security',
               name: RouteName.SECURITY,
-              component: RouterView,
+              component: () => import('./views/ViewSecurity.vue'),
             },
             {
               path: 'notifications',
               name: RouteName.NOTIFICATIONS,
-              component: RouterView,
+              component: () => import('./views/ViewNotifications.vue'),
             },
           ],
         },
@@ -58,17 +58,17 @@ export const routerHome = {
             {
               path: '',
               name: RouteName.PREFERENCES,
-              component: RouterView,
+              component: () => import('./views/ViewPreferences.vue'),
             },
             {
               path: 'theme',
               name: RouteName.THEME,
-              component: RouterView,
+              component: () => import('./views/ViewTheme.vue'),
             },
             {
               path: 'language',
               name: RouteName.LANGUAGE,
-              component: RouterView,
+              component: () => import('./views/ViewLanguage.vue'),
             },
           ],
         },

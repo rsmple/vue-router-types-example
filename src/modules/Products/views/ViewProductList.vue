@@ -15,6 +15,19 @@
   </RouterLink>
 
   <RouterLink
+    v-for="productCategoryId in 4"
+    :key="productCategoryId"
+    :to="{
+      name: RouteName.PRODUCT_CATEGORY,
+      params: {
+        productCategoryId,
+      }
+    }"
+  >
+    View product category {{ productCategoryId }}
+  </RouterLink>
+
+  <RouterLink
     :to="{
       name: RouteName.DASHBOARD,
     }"

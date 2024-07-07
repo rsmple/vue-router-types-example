@@ -1,17 +1,20 @@
 <template>
-  Category. {{ route.params.productCategoryId }}
+  Settings. {{ route.name }}
 
   <RouterLink
-    v-for="productId in 4"
-    :key="productId"
     :to="{
-      name: RouteName.PRODUCT,
-      params: {
-        productId,
-      }
+      name: RouteName.ACCOUNT,
     }"
   >
-    View product {{ productId }}
+    Account
+  </RouterLink>
+
+  <RouterLink
+    :to="{
+      name: RouteName.PREFERENCES,
+    }"
+  >
+    Preferences
   </RouterLink>
 
   <RouterLink
@@ -19,7 +22,7 @@
       name: RouteName.DASHBOARD,
     }"
   >
-    Back to Home
+    Back to dashboard
   </RouterLink>
 </template>
 
@@ -27,5 +30,6 @@
 import {RouteName} from '@/utils/RouteName'
 import {useRoute} from 'vue-router'
 
-const route = useRoute<RouteName.PRODUCT_CATEGORY>()
+const route = useRoute<RouteName.SETTINGS>()
+
 </script>

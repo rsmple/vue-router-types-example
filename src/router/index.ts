@@ -3,7 +3,7 @@ import {routerBlog} from '@/modules/Blog/routerBlog'
 import {routerHome} from '@/modules/Home/routerHome'
 import {routerProducts} from '@/modules/Products/routerProducts'
 import {RouteName} from '@/utils/RouteName'
-import {createRouter, createWebHistory, RouterView, type RouteRecordRaw} from 'vue-router'
+import {createRouter, createWebHistory, RouterView, type LocationQueryValue, type RouteRecordRaw} from 'vue-router'
 
 export const routes = [
   {
@@ -29,8 +29,8 @@ const router = createRouter({
           let changed = false
 
           Object.keys(to.meta.defaultQueryParams).forEach(key => {
-            if (!to.query[key]) {
-              to.query[key] = to.meta.defaultQueryParams[key]
+            if (!to.query[key] && to.meta.defaultQueryParams?.[key]) {
+              to.query[key] = to.meta.defaultQueryParams[key] as LocationQueryValue
 
               changed = true
             }

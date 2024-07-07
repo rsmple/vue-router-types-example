@@ -4,7 +4,7 @@ declare module 'vue-router' {
   VueRouter
 
   interface RouteMeta extends RouteMetaCustom {
-    noAuth?: boolean
+    defaultQueryParams?: LocationQueryRaw
   }
 
   declare interface RouterLinkProps extends RouterLinkProps {
@@ -159,5 +159,4 @@ type RouterExtended = {
 }
 
 interface RouteMetaCustom {
-  defaultQueryParams?: LocationQueryRaw
 }

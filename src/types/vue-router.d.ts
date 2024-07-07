@@ -20,10 +20,10 @@ declare module 'vue-router' {
       redirectedFrom: RouteLocationCurrentMatched | undefined,
     }
 
-    $router: RouterWithParams
+    $router: RouterExtended
   }
 
-  function useRouter(): RouterWithParams
+  function useRouter(): RouterExtended
 
   function useRoute<T extends RouteLocationCurrent['name']>(): GetRouteMatchedByName<T> & {
     redirectedFrom: RouteLocationCurrentMatched | undefined,
@@ -150,8 +150,12 @@ type RouterWithParams = {
   replace(to: RouteLocationCurrent | NamelessRoute): ReturnType<import('vue-router').Router['replace']>
 
   resolve<T extends string | RouteLocationCurrent>(to: T, currentLocation?: RouteLocationCurrentMatched): T extends {name: infer Name} ? GetRouteMatchedByName<Name> : RouteLocationCurrentMatched
+}
 
-  back(): ReturnType<import('vue-router').Router['back']>
+type RouterExtended = {
+  [Key in keyof RouterWithParams | keyof import('vue-router').Router]: Key extends keyof RouterWithParams
+  ? RouterWithParams[Key]
+  : import('vue-router').Router[Key]
 }
 
 interface RouteMetaCustom {

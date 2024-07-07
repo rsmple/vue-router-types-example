@@ -1,52 +1,105 @@
+import {RouteName} from '@/utils/RouteName'
 import {RouterView, type RouteRecordRaw} from 'vue-router'
 
 export const routerAdmin = {
   path: '/admin',
-  component: RouterView,
   children: [
     {
-      path: 'users/:userId',
-      component: RouterView,
+      path: 'users',
       children: [
         {
-          path: 'edit',
+          path: '',
+          name: RouteName.USER_LIST,
           component: RouterView,
         },
         {
-          path: 'permissions/:permissionId',
+          path: ':userId',
+          component: RouterView,
+          children: [
+            {
+              path: '',
+              name: RouteName.USER,
+              component: RouterView,
+            },
+            {
+              path: 'permissions/:permissionId',
+              name: RouteName.USER_PERMISSION,
+              component: RouterView,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      path: 'reports',
+      children: [
+        {
+          path: '',
+          name: RouteName.REPORT_LIST,
+          component: RouterView,
+        },
+        {
+          path: ':reportId',
+          name: RouteName.REPORT,
           component: RouterView,
         },
       ],
     },
     {
-      path: 'reports/:reportId',
-      component: RouterView,
-    },
-    {
-      path: 'logs/:logId',
-      component: RouterView,
+      path: 'logs',
       children: [
         {
-          path: 'details',
+          path: '',
+          name: RouteName.LOG_LIST,
           component: RouterView,
+        },
+        {
+          path: ':logId',
+          children: [
+            {
+              path: '',
+              name: RouteName.LOG,
+              component: RouterView,
+            },
+            {
+              path: 'details',
+              name: RouteName.LOG_DETAILS,
+              component: RouterView,
+            },
+          ],
         },
       ],
     },
     {
       path: 'settings',
-      component: RouterView,
       children: [
         {
           path: 'general',
+          name: RouteName.GENERAL,
           component: RouterView,
         },
         {
-          path: 'roles/:roleId',
-          component: RouterView,
+          path: 'roles',
           children: [
             {
-              path: 'permissions/:permissionId',
+              path: '',
+              name: RouteName.ROLE_LIST,
               component: RouterView,
+            },
+            {
+              path: ':roleId',
+              children: [
+                {
+                  path: '',
+                  component: RouterView,
+                  name: RouteName.ROLE,
+                },
+                {
+                  path: 'permissions/:permissionId',
+                  component: RouterView,
+                  name: RouteName.ROLE_PERMISSION,
+                },
+              ],
             },
           ],
         },

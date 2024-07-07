@@ -1,55 +1,63 @@
+import {RouteName} from '@/utils/RouteName'
 import {RouterView, type RouteRecordRaw} from 'vue-router'
 
 export const routerHome = {
   path: '/home',
-  component: RouterView,
   children: [
     {
       path: 'dashboard',
+      name: RouteName.DASHBOARD,
       component: RouterView,
     },
     {
       path: 'profile',
+      name: RouteName.PROFILE,
       component: RouterView,
-      children: [
-        {
-          path: 'edit',
-          component: RouterView,
-        },
-        {
-          path: 'view',
-          component: RouterView,
-        },
-      ],
     },
     {
       path: 'settings',
-      component: RouterView,
       children: [
         {
-          path: 'account',
+          path: '',
+          name: RouteName.SETTINGS,
           component: RouterView,
+        },
+        {
+          path: 'account',
           children: [
             {
+              path: '',
+              name: RouteName.ACCOUNT,
+              component: RouterView,
+            },
+            {
               path: 'security',
+              name: RouteName.SECURITY,
               component: RouterView,
             },
             {
               path: 'notifications',
+              name: RouteName.NOTIFICATIONS,
               component: RouterView,
             },
           ],
         },
         {
           path: 'preferences',
-          component: RouterView,
           children: [
             {
+              path: '',
+              name: RouteName.PREFERENCES,
+              component: RouterView,
+            },
+            {
               path: 'theme',
+              name: RouteName.THEME,
               component: RouterView,
             },
             {
               path: 'language',
+              name: RouteName.LANGUAGE,
               component: RouterView,
             },
           ],

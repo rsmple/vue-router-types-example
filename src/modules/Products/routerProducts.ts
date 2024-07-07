@@ -1,23 +1,38 @@
+import {RouteName} from '@/utils/RouteName'
 import {RouterView, type RouteRecordRaw} from 'vue-router'
 
 export const routerProducts = {
   path: '/products',
-  component: RouterView,
   children: [
     {
-      path: 'list/:categoryId',
+      path: '',
+      name: RouteName.PRODUCT_LIST,
       component: RouterView,
     },
     {
-      path: 'details',
+      path: 'list/:categoryId',
+      name: RouteName.CATEGOGY,
       component: RouterView,
+    },
+    {
+      path: 'details/:productId',
       children: [
         {
-          path: ':productId',
+          path: '',
+          name: RouteName.PRODUCT,
           component: RouterView,
+        },
+        {
+          path: 'reviews/:reviewId',
           children: [
             {
-              path: 'reviews/:reviewId/comments/:commentId',
+              path: '',
+              name: RouteName.REVIEW,
+              component: RouterView,
+            },
+            {
+              path: 'comments/:commentId',
+              name: RouteName.REVIEW_COMMENT,
               component: RouterView,
             },
           ],
@@ -26,6 +41,7 @@ export const routerProducts = {
     },
     {
       path: 'compare/:productId1/:productId2',
+      name: RouteName.REVIEW_COMPARE,
       component: RouterView,
     },
   ],

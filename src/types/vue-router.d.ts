@@ -16,18 +16,14 @@ declare module 'vue-router' {
   }
 
   interface TypesConfig {
-    $route: RouteLocationCurrentMatched & {
-      redirectedFrom: RouteLocationCurrentMatched | undefined,
-    }
+    $route: RouteLocationCurrentMatched
 
     $router: RouterExtended
   }
 
   function useRouter(): RouterExtended
 
-  function useRoute<T extends RouteLocationCurrent['name']>(): GetRouteMatchedByName<T> & {
-    redirectedFrom: RouteLocationCurrentMatched | undefined,
-  }
+  function useRoute<T extends RouteLocationCurrent['name']>(): GetRouteMatchedByName<T>
 }
 
 type ForParams<List, Result = NonNullable<unknown>> = List extends [infer Current, ...infer Tail]

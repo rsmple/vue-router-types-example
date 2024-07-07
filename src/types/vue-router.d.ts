@@ -9,7 +9,6 @@ declare module 'vue-router' {
 
   declare interface RouterLinkProps extends RouterLinkProps {
     to: RouteLocationCurrent
-    replace?: boolean
   }
 
   declare interface NavigationGuard {
@@ -128,7 +127,7 @@ type GetRouteByName<Name extends RouteLocationCurrent['name'], List = RoutesProc
   : Result
 
 declare type GetRouteMatchedByName<Name extends RouteLocationCurrent['name']> = GetRouteByName<Name, RoutesProccessedMatched>
-declare type GetRouteByName<Name extends RouteLocationCurrent['name']> = GetRouteByName<Name, RoutesProccessed>
+declare type GetRouteCurrentByName<Name extends RouteLocationCurrent['name']> = GetRouteByName<Name, RoutesProccessed>
 
 type GetRoutesWithParams<Current> = Current extends [infer Head, ...infer Tail]
   ? Head['params'] extends object

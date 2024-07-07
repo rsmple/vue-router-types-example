@@ -74,43 +74,35 @@ type GetRoute<FullPath, Head> = FullPath extends `${ string }:${ string }` ? {
   meta?: GetMetaType<Head>
 }
 
-type GetRouteMatched<FullPath, Head> = FullPath extends `${ string }:${ string }` ? {
-  params: ForParams<Split<FullPath, '/'>>
-  name: Head['name']
-  query: GetQueryType<Head>
-  hash: string
-  meta: GetMetaType<Head>
-  fullPath: string
-  matched: import('vue-router').RouteRecord[]
-} : {
-  name: Head['name']
-  query: GetQueryType<Head>
-  hash: string
-  meta: GetMetaType<Head>
-  fullPath: string
-  matched: import('vue-router').RouteRecord[]
-}
-
-type ProccessRoutes<T, IsMatched = false, Path extends string = ''> =
+type ProccessRoutes<T, Path extends string = ''> =
   T extends [infer Head, ...infer Tail]
   ? Head extends import('vue-router').RouteRecordRaw
   ? Head['name'] extends string
   ? [
-    IsMatched extends true
-    ? GetRouteMatched<`${ Path }/${ Head['path'] }`, Head>
-    : GetRoute<`${ Path }/${ Head['path'] }`, Head>,
-    ...ProccessRoutes<Head['children'], IsMatched, `${ Path }/${ Head['path'] }`>,
-    ...ProccessRoutes<Tail, IsMatched, Path>
+    GetRoute<`${ Path }/${ Head['path'] }`, Head>,
+    ...ProccessRoutes<Head['children'], `${ Path }/${ Head['path'] }`>,
+    ...ProccessRoutes<Tail, Path>
   ]
   : [
-    ...ProccessRoutes<Head['children'], IsMatched, `${ Path }/${ Head['path'] }`>,
-    ...ProccessRoutes<Tail, IsMatched, Path>,
+    ...ProccessRoutes<Head['children'], `${ Path }/${ Head['path'] }`>,
+    ...ProccessRoutes<Tail, Path>,
   ]
-  : ProccessRoutes<Tail, IsMatched, Path>
+  : ProccessRoutes<Tail, Path>
+  : []
+
+type GetRoutesMatched<T> = T extends [infer Head, ...infer Tail]
+  ? [
+    {
+      [Key in keyof Head | keyof import('vue-router').RouteLocationMatched]-?: Key extends keyof Head
+      ? NonNullable<Head[Key]>
+      : import('vue-router').RouteLocationMatched[Key]
+    },
+    ...GetRoutesMatched<Tail>
+  ]
   : []
 
 type RoutesProccessed = ProccessRoutes<typeof import('@/router/index').routes>
-type RoutesProccessedMatched = ProccessRoutes<typeof import('@/router/index').routes, true>
+type RoutesProccessedMatched = GetRoutesMatched<RoutesProccessed>
 
 declare type RouteLocationCurrent = RoutesProccessed[number]
 declare type RouteLocationCurrentMatched = RoutesProccessedMatched[number]

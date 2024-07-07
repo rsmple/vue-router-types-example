@@ -43,7 +43,7 @@ export const routerAdmin = {
             {
               path: 'permissions/:permissionId',
               name: RouteName.USER_PERMISSION,
-              component: () => import('./views/ViewUserPermission.vue'),
+              component: () => import('./views/ViewPermission.vue'),
             },
           ],
         },
@@ -118,7 +118,7 @@ export const routerAdmin = {
                 },
                 {
                   path: 'permissions/:permissionId',
-                  component: () => import('./views/ViewRolePermission.vue'),
+                  component: () => import('./views/ViewPermission.vue'),
                   name: RouteName.ROLE_PERMISSION,
                 },
               ],
